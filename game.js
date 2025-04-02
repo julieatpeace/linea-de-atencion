@@ -6,7 +6,7 @@ let gameOver = false;
 
 const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
-const API_URL = "https://script.google.com/macros/s/AKfycbyIuCQJr5oF1bXbl54jVmoP92BTKWCNm2mj0_yyDJAAH6rJ3g8KRYYV0o5KKeAnkTbA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycby-PssXMahJR2DH-ENiYlnoDJEO8Q1QDA-Yd70AgjVMCjMiFHKuajLjKqGCbbHlG8xv/exec";
 
 function startGame() {
     alias = document.getElementById("alias-input").value;

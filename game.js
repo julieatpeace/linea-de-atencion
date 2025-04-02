@@ -6,9 +6,9 @@ let gameOver = false;
 
 const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
-const BIN_ID = "67ed9dfe8960c979a57d2ba4"; // ID de tu JSONBin
-const API_KEY = "$2a$10$Fqa.SCq6HuUSVkgo8B2oZOg6zUlDZ0WwItbx5d/nffF0Gq7MAhHCS"; // Reemplaza con tu API Key
-const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const BIN_ID = "67ed9dfe8960c979a57d2ba4";
+const API_KEY = "$2a$10$xmGRNNh1Jm3GiKe8TM/qruZdauws0JKajj/fbhm/jcEHQ8GQGau5q";
+const API_URL = `https://api.jsonbin.io/v3/b/67ed9dfe8960c979a57d2ba4`;
 
 function startGame() {
     alias = document.getElementById("alias-input").value;

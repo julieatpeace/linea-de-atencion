@@ -8,7 +8,7 @@ const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
 const BIN_ID = "67ed9dfe8960c979a57d2ba4";
 const API_KEY = "$2a$10$xmGRNNh1Jm3GiKe8TM/qruZdauws0JKajj/fbhm/jcEHQ8GQGau5q";
-const API_URL = `https://api.jsonbin.io/v3/b/67ed9dfe8960c979a57d2ba4`;
+const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 function startGame() {
     alias = document.getElementById("alias-input").value;
@@ -51,7 +51,6 @@ function checkCharacter() {
         message.textContent = `¡Correcto! Lo lograste en ${timeTaken} segundos.`;
 
         saveScore(alias, timeTaken);
-        fetchTopTen();
         gameStarted = false;
         clearInterval(interval);
 
@@ -108,6 +107,10 @@ async function saveScore(alias, time) {
         });
 
         console.log("Puntaje guardado correctamente");
+
+        // Mostrar el nuevo Top 10
+        fetchTopTen();
+
     } catch (error) {
         console.error("Error al guardar:", error);
     }

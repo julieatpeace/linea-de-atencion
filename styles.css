@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+#start-screen, #game-screen, #end-screen {
+    margin-top: 50px;
+}
+
+input {
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#message {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#top-ten {
+    list-style-type: none;
+    padding: 0;
+}
+
+#top-ten li {
+    margin: 5px 0;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}

@@ -6,7 +6,7 @@ let gameOver = false;
 
 const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
-const API_URL = "https://script.google.com/macros/s/AKfycby-PssXMahJR2DH-ENiYlnoDJEO8Q1QDA-Yd70AgjVMCjMiFHKuajLjKqGCbbHlG8xv/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz--Rux7TpMh6F1Sqkc7qFRk1mfXI9oqZFBgG2AAiOe0evqmjA1DHvXfWNwYDspRsP2/exec"; // URL de la API de Google Apps Script
 
 function startGame() {
     alias = document.getElementById("alias-input").value;
@@ -81,7 +81,8 @@ function saveScore(alias, time) {
     fetch(API_URL, {
         method: "POST",
         body: JSON.stringify({ alias: alias, time: time }),
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        mode: "cors"  // Aseguramos que la solicitud sea CORS.
     })
     .then(response => response.text())
     .then(data => console.log("Guardado:", data))
@@ -89,7 +90,7 @@ function saveScore(alias, time) {
 }
 
 function fetchTopTen() {
-    fetch(API_URL)
+    fetch(API_URL, { mode: "cors" }) // Aseguramos que la solicitud sea CORS.
     .then(response => response.json())
     .then(data => {
         let topTenList = document.getElementById("top-ten");

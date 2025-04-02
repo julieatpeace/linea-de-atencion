@@ -6,8 +6,9 @@ let gameOver = false;
 
 const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
-const API_URL = "/api/";
-
+const BIN_ID = "67ed9dfe8960c979a57d2ba4"; // ID de tu JSONBin
+const API_KEY = "$2a$10$Fqa.SCq6HuUSVkgo8B2oZOg6zUlDZ0WwItbx5d/nffF0Gq7MAhHCS"; // Reemplaza con tu API Key
+const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 function startGame() {
     alias = document.getElementById("alias-input").value;
@@ -78,32 +79,69 @@ function endGame() {
     document.getElementById("retry-area").style.display = "block";
 }
 
-function saveScore(alias, time) {
-    fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ alias: alias, time: time }),
-    })
-    .then(response => response.json()) 
-    .then(data => console.log("Guardado:", data))
-    .catch(error => console.error("Error al guardar:", error));
+async function saveScore(alias, time) {
+    try {
+        // Obtener los datos actuales
+        let response = await fetch(API_URL, {
+            method: "GET",
+            headers: {
+                "X-Master-Key": API_KEY,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) throw new Error("Error obteniendo datos");
+
+        let data = await response.json();
+
+        // Agregar nuevo puntaje
+        data.record.scores.push({ alias, time, date: new Date().toISOString() });
+
+        // Guardar de nuevo en JSONBin
+        await fetch(API_URL, {
+            method: "PUT",
+            headers: {
+                "X-Master-Key": API_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data.record)
+        });
+
+        console.log("Puntaje guardado correctamente");
+    } catch (error) {
+        console.error("Error al guardar:", error);
+    }
 }
 
-function fetchTopTen() {
-    fetch(API_URL)
-    .then(response => response.json())
-    .then(data => {
+async function fetchTopTen() {
+    try {
+        let response = await fetch(API_URL, {
+            method: "GET",
+            headers: {
+                "X-Master-Key": API_KEY,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) throw new Error("Error obteniendo datos");
+
+        let data = await response.json();
+
+        // Ordenar por menor tiempo y obtener los 10 mejores
+        let topTen = data.record.scores.sort((a, b) => a.time - b.time).slice(0, 10);
+
         let topTenList = document.getElementById("top-ten");
         topTenList.innerHTML = "";
 
-        data.sort((a, b) => a.time - b.time);
-        data.slice(0, 10).forEach((entry, index) => {
+        topTen.forEach((entry, index) => {
             let li = document.createElement("li");
             li.textContent = `${index + 1}. [${new Date(entry.date).toLocaleDateString()}] ${entry.alias} – ${entry.time}s`;
             topTenList.appendChild(li);
         });
-    })
-    .catch(error => console.error("Error al obtener Top 10:", error));
+
+    } catch (error) {
+        console.error("Error al obtener Top 10:", error);
+    }
 }
 
 function startNewGame() {

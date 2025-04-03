@@ -3,7 +3,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #0072BC;
 }
 
 #start-screen, #game-screen, #end-screen {
@@ -49,4 +49,68 @@ button:hover {
 
 .incorrect {
     color: red;
+}
+
+.container {
+    background-color: rgba(231, 227, 227, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 60px 60px;
+    margin: 0 auto;
+    max-width: 650px;
+    border-radius: 20px;
+    border: 1px solid #ffffff42;
+    justify-content: center;
+    align-content: center;
+}
+
+section {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para alias input */
+#alias-container {
+    display: inline-block;
+    position: relative;
+    font-size: 18px;
+    color: white;
+    cursor: text;
+}
+
+#alias-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 18px;
+    width: 200px;
+    caret-color: white;
+}
+
+#alias-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: opacity 0.2s ease-out;
+}
+
+/* Asegurar que el campo de teléfono solo acepte números */
+
+#phone-number {
+    ime-mode: disabled;
+    letter-spacing: 15px; /* Adjust spacing for 7 numbers */
+    font-family: "Courier New", Courier, monospace;
+    font-size: 150%;
+    font-weight: bold;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 200px; /* Adjusted for 7 digits */
+    border: 0;
+    background-color: transparent;
+    outline: 0;
 }

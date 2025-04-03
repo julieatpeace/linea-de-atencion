@@ -44,11 +44,12 @@ function checkCharacter() {
 
     const input = document.getElementById("phone-number").value;
     const message = document.getElementById("message");
+    const messageVictory = document.getElementById("messageVictory");
 
     if (input === correctNumber1 || input === correctNumber2) {
         const endTime = Date.now();
         const timeTaken = Math.floor((endTime - startTime) / 1000);
-        message.textContent = `¡Correcto! Lo lograste en ${timeTaken} segundos.`;
+        messageVictory.textContent = `¡Correcto! Lo lograste en ${timeTaken} segundos.`;
 
         saveScore(alias, timeTaken);
         gameStarted = false;
@@ -64,7 +65,7 @@ function checkCharacter() {
             message.textContent = "Vas bien!";
             message.className = "correct";
         } else {
-            message.textContent = "Te equivocaste, el juego ha terminado.";
+            message.textContent = "Oops...";
             message.className = "incorrect";
             endGame();
         }

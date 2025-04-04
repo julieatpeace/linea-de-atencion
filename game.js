@@ -101,10 +101,10 @@ function checkCharacter() {
             gameOver = true;
             clearInterval(interval);
             document.getElementById("time").style.display = "none";
-
-            const endTime = Date.now();
-            const timeTaken = Math.floor((endTime - startTime) / 1000);
-            saveScore(alias, timeTaken); // El end-screen se muestra desde saveScore()
+        
+            endGame(); // 👉 Mostramos mensaje y botón de reintentar
+        
+            // No guardamos el puntaje si perdió
         }
     }
 }

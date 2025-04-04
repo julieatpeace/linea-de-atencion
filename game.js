@@ -146,7 +146,7 @@ async function fetchTopTen() {
 
         topTen.forEach((entry, index) => {
             let li = document.createElement("li");
-            li.textContent = `${index + 1}. [${new Date(entry.date).toLocaleDateString()}] ${entry.alias} – ${entry.time}s`;
+            li.textContent = `[${new Date(entry.date).toLocaleDateString()}] ${entry.alias} – ${entry.time}s`;
 
             // 🔥 Resalta el puntaje recién agregado
             if (entry.alias === alias && entry.time === lastTimeTaken) {

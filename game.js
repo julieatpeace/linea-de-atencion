@@ -98,6 +98,10 @@ function checkCharacter() {
         inputEl.value = input.slice(0, -1);
         attemptsLeft--;
 
+        if (navigator.vibrate) {
+            navigator.vibrate(200); // vibra por 200 ms
+        }
+        
         message.textContent = attemptsLeft > 0 ? "Oops, te has equivocado..." : "Perdiste";
         message.className = "incorrect";
 

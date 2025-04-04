@@ -1,13 +1,11 @@
+html{
+    font-family: "Funnel Display", sans-serif;
+}
 body {
-    font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
     background-color: #0072BC;
-}
-
-#start-screen, #game-screen, #end-screen {
-    margin-top: 50px;
 }
 
 input {
@@ -18,12 +16,34 @@ input {
 
 button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
-    background-color: #007bff;
-    color: white;
     border: none;
+    border-radius: 100px;
+    font-family: "Funnel Display", sans-serif;
+    background-color: #FAEB00;
+    color: black;
 }
+
+h1{
+    font-size: 50px;
+    color: aliceblue;
+    line-height: 50px;
+    margin-top: 0;
+}
+
+img{
+    height: 100px;
+}
+
+h1 .highlight {
+    background: #575ec4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(30deg, #92c5ff , #7bc7e7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(30deg, #92c5ff , #7bc7e7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+} 
 
 button:hover {
     background-color: #0056b3;
@@ -52,13 +72,9 @@ button:hover {
 }
 
 .container {
-    background-color: rgba(231, 227, 227, 0.1);
-    backdrop-filter: blur(10px);
     padding: 60px 60px;
     margin: 0 auto;
     max-width: 650px;
-    border-radius: 20px;
-    border: 1px solid #ffffff42;
     justify-content: center;
     align-content: center;
 }
@@ -71,25 +87,33 @@ section {
 }
 
 /* Estilo para alias input */
-#alias-container {
+#alias-container { 
     display: inline-block;
     position: relative;
-    font-size: 18px;
-    color: white;
     cursor: text;
 }
 
 #alias-input {
+    font-family: "Funnel Display", sans-serif;
     background: transparent;
     border: none;
     outline: none;
     color: white;
-    font-size: 18px;
-    width: 200px;
+    font-size: 30px;
+    width: 300px;
     caret-color: white;
+    text-align: center;
 }
 
+input::placeholder {
+    font-family: "Funnel Display", sans-serif;
+    opacity: 0.5;
+    color: rgb(255, 255, 255);
+    text-align: center;
+  }
+
 #alias-placeholder {
+    font-family: "Funnel Display", sans-serif;
     position: absolute;
     top: 0;
     left: 0;
@@ -103,7 +127,7 @@ section {
 #phone-number {
     ime-mode: disabled;
     letter-spacing: 15px; /* Adjust spacing for 7 numbers */
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Funnel Display", sans-serif;
     font-size: 150%;
     font-weight: bold;
     height: 30px;
@@ -113,4 +137,12 @@ section {
     border: 0;
     background-color: transparent;
     outline: 0;
+}
+
+
+.highlight-score {
+    background-color: yellow;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 20px;
 }

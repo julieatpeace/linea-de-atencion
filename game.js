@@ -3,6 +3,7 @@ let gameStarted = false;
 let interval;
 let alias = "";
 let gameOver = false;
+let lastTimeTaken = null; // Guarda el último puntaje ingresado
 
 const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
@@ -28,6 +29,10 @@ function startGame() {
     document.getElementById("start-screen").style.display = "none";
     document.getElementById("game-screen").style.display = "block";
     document.getElementById("end-screen").style.display = "none";
+
+    setTimeout(() => {
+        document.getElementById("phone-number").focus();
+    }, 100); // Asegura que el input reciba el focus correctamente
 
     startTime = Date.now();
     interval = setInterval(updateTime, 1000);
@@ -65,7 +70,7 @@ function checkCharacter() {
             message.textContent = "Vas bien!";
             message.className = "correct";
         } else {
-            message.textContent = "Oops...";
+            message.textContent = "Oops, te has equivocado...";
             message.className = "incorrect";
             endGame();
         }
@@ -81,7 +86,6 @@ function endGame() {
 
 async function saveScore(alias, time) {
     try {
-        // Obtener los datos actuales
         let response = await fetch(API_URL, {
             method: "GET",
             headers: {
@@ -93,6 +97,9 @@ async function saveScore(alias, time) {
         if (!response.ok) throw new Error("Error obteniendo datos");
 
         let data = await response.json();
+
+        // Guardar el puntaje recién ingresado
+        lastTimeTaken = time;
 
         // Agregar nuevo puntaje
         data.record.scores.push({ alias, time, date: new Date().toISOString() });
@@ -109,7 +116,7 @@ async function saveScore(alias, time) {
 
         console.log("Puntaje guardado correctamente");
 
-        // Mostrar el nuevo Top 10
+        // Mostrar el nuevo Top 10 con el puntaje resaltado
         fetchTopTen();
 
     } catch (error) {
@@ -140,6 +147,12 @@ async function fetchTopTen() {
         topTen.forEach((entry, index) => {
             let li = document.createElement("li");
             li.textContent = `${index + 1}. [${new Date(entry.date).toLocaleDateString()}] ${entry.alias} – ${entry.time}s`;
+
+            // 🔥 Resalta el puntaje recién agregado
+            if (entry.alias === alias && entry.time === lastTimeTaken) {
+                li.classList.add("highlight-score");
+            }
+
             topTenList.appendChild(li);
         });
 

@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Línea de atención de ACNUR</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
 </head>
 <body>
     <section>
     <div class="container">
         <div id="start-screen">
-            <h1>¿Conoces la línea de atención de ACNUR?</h1>
+            <img src="img/placeholder.gif" alt="">
+            <h1>Memoriza la<br><span class="highlight">línea de atención</span><br>de ACNUR</h1>
             <div id="alias-container">
                 <input type="text" id="alias-input" placeholder="Ingresa tu nombre" autofocus>
             </div>
@@ -18,6 +22,7 @@
             <button onclick="startGame()">Iniciar juego</button>
         </div>
         <div id="game-screen" style="display:none;">
+            <img src="img/placeholder.gif" alt="">
             <p>Ingresa el número de la línea de atención de ACNUR</p>
             <input type="text" id="phone-number" placeholder="0000000" oninput="checkCharacter()">
             <p id="time">Tiempo: 0s</p>
@@ -28,6 +33,7 @@
             </div>
         </div>
         <div id="end-screen" style="display:none;">
+            <img src="img/placeholder.gif" alt="">
             <p id="messageVictory"></p>
             <h3>Score:</h3>
             <ul id="top-ten"></ul>

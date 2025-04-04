@@ -72,11 +72,17 @@ function checkCharacter() {
         const endTime = Date.now();
         const timeTaken = Math.floor((endTime - startTime) / 1000);
         messageVictory.textContent = `¡Correcto! Lo lograste en ${timeTaken} segundos.`;
-
+    
         gameStarted = false;
         clearInterval(interval);
-
-        saveScore(alias, timeTaken); // El end-screen se muestra desde saveScore()
+    
+        showScreen("loading-screen"); // ✅ Mostrar loading inmediatamente
+    
+        // ✅ Guardar score y luego mostrar end-screen
+        saveScore(alias, timeTaken).then(() => {
+            showScreen("end-screen");
+        });
+    
         return;
     }
 
@@ -143,10 +149,8 @@ async function saveScore(alias, time) {
         // Guardar el puntaje recién ingresado
         lastTimeTaken = time;
 
-        // Agregar nuevo puntaje
         data.record.scores.push({ alias, time, date: new Date().toISOString() });
 
-        // Guardar de nuevo en JSONBin
         await fetch(API_URL, {
             method: "PUT",
             headers: {
@@ -156,14 +160,7 @@ async function saveScore(alias, time) {
             body: JSON.stringify(data.record)
         });
 
-        console.log("Puntaje guardado correctamente");
-
-        // Mostrar el nuevo Top 10 con el puntaje resaltado
-        await fetchTopTen();
-
-        // Mostrar el end-screen después de un pequeño loading
-        showLoadingThen("end-screen", 1000); // podés ajustar el tiempo si querés
-        renderTopScores(topScores);
+        await fetchTopTen(); // ✅ Asegura que los datos estén actualizados
 
     } catch (error) {
         console.error("Error al guardar:", error);

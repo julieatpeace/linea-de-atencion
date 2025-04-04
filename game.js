@@ -111,10 +111,13 @@ function checkCharacter() {
             gameOver = true;
             clearInterval(interval);
             document.getElementById("time").style.display = "none";
+
+            if (navigator.vibrate) {
+                navigator.vibrate([300, 100, 300, 100, 500]);
+            }
         
             endGame(); // 👉 Mostramos mensaje y botón de reintentar
         
-            // No guardamos el puntaje si perdió
         }
     }
 }

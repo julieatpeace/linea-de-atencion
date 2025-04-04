@@ -141,8 +141,36 @@ input::placeholder {
 
 
 .highlight-score {
-    background-color: yellow;
+    background-color: #FAEB00;
     font-weight: bold;
     padding: 5px;
     border-radius: 20px;
 }
+
+.hearts{
+    width: 100px;
+    height: auto;
+}
+
+.game-over {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5em;
+    animation: shake 0.3s ease-in-out 2;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+#loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: aliceblue;
+  }

@@ -3,15 +3,17 @@ let gameStarted = false;
 let interval;
 let alias = "";
 let gameOver = false;
-let lastTimeTaken = null; // Guarda el último puntaje ingresado
+let mistakes = 0; // 👉 Nuevo: contador de errores
+let lastTimeTaken = null;
 
 const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
-const BIN_ID = "67ed9dfe8960c979a57d2ba4";
+const BIN_ID = "67f002dc8a456b7966827e66";
 const API_KEY = "$2a$10$xmGRNNh1Jm3GiKe8TM/qruZdauws0JKajj/fbhm/jcEHQ8GQGau5q";
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 function startGame() {
+    document.getElementById("time").style.display = "block";
     alias = document.getElementById("alias-input").value;
     if (!alias) {
         alert("Ingresa un nombre para jugar ✨");
@@ -20,11 +22,13 @@ function startGame() {
 
     gameStarted = true;
     gameOver = false;
+    mistakes = 0; // 👉 Reinicia errores
     document.getElementById("message").textContent = "";
     document.getElementById("phone-number").value = "";
     document.getElementById("phone-number").disabled = false;
     document.getElementById("retry-area").style.display = "none";
     document.getElementById("time").textContent = "Tiempo: 0s";
+    updateHearts(); // 👉 Muestra 3 corazones
 
     document.getElementById("start-screen").style.display = "none";
     document.getElementById("game-screen").style.display = "block";
@@ -32,10 +36,18 @@ function startGame() {
 
     setTimeout(() => {
         document.getElementById("phone-number").focus();
-    }, 100); // Asegura que el input reciba el focus correctamente
+    }, 100);
 
     startTime = Date.now();
     interval = setInterval(updateTime, 1000);
+
+    attemptsLeft = 3;
+    document.querySelector("#hearts img").src = "img/Hearts3.gif";
+}
+
+function updateHearts() {
+    const heartsImg = document.querySelector("#hearts img");
+    heartsImg.src = `img/Hearts${3 - mistakes}.gif`;
 }
 
 function updateTime() {
@@ -44,44 +56,74 @@ function updateTime() {
     document.getElementById("time").textContent = `Tiempo: ${elapsedTime}s`;
 }
 
+let attemptsLeft = 3; // Número de vidas
+
 function checkCharacter() {
     if (!gameStarted || gameOver) return;
 
-    const input = document.getElementById("phone-number").value;
+    const inputEl = document.getElementById("phone-number");
+    const input = inputEl.value;
     const message = document.getElementById("message");
     const messageVictory = document.getElementById("messageVictory");
+    const fullCorrect = correctNumber1 + correctNumber2;
 
+    // Validación completa
     if (input === correctNumber1 || input === correctNumber2) {
         const endTime = Date.now();
         const timeTaken = Math.floor((endTime - startTime) / 1000);
         messageVictory.textContent = `¡Correcto! Lo lograste en ${timeTaken} segundos.`;
 
-        saveScore(alias, timeTaken);
         gameStarted = false;
         clearInterval(interval);
 
-        document.getElementById("game-screen").style.display = "none";
-        document.getElementById("end-screen").style.display = "block";
-    } else {
-        const currentChar = input.charAt(input.length - 1);
-        const correctChar = (correctNumber1 + correctNumber2)[input.length - 1];
+        saveScore(alias, timeTaken); // El end-screen se muestra desde saveScore()
+        return;
+    }
 
-        if (currentChar === correctChar) {
-            message.textContent = "Vas bien!";
-            message.className = "correct";
-        } else {
-            message.textContent = "Oops, te has equivocado...";
-            message.className = "incorrect";
-            endGame();
+    const currentLength = input.length;
+    const expectedChar = fullCorrect[currentLength - 1];
+    const actualChar = input.charAt(currentLength - 1);
+
+    if (actualChar === expectedChar) {
+        message.textContent = "¡Vas bien!";
+        message.className = "correct";
+    } else {
+        // ❌ Quitar el carácter incorrecto y reducir intentos
+        inputEl.value = input.slice(0, -1);
+        attemptsLeft--;
+
+        message.textContent = attemptsLeft > 0 ? "Oops, te has equivocado..." : "Perdiste";
+        message.className = "incorrect";
+
+        updateHearts();
+
+        if (attemptsLeft === 0) {
+            gameOver = true;
+            clearInterval(interval);
+            document.getElementById("time").style.display = "none";
+
+            const endTime = Date.now();
+            const timeTaken = Math.floor((endTime - startTime) / 1000);
+            saveScore(alias, timeTaken); // El end-screen se muestra desde saveScore()
         }
     }
 }
+
+
 
 function endGame() {
     gameOver = true;
     clearInterval(interval);
     document.getElementById("phone-number").disabled = true;
     document.getElementById("retry-area").style.display = "block";
+
+    // 👉 Muestra imagen de 0 corazones
+    document.querySelector("#hearts img").src = "img/Hearts0.gif";
+
+    // 👉 Muestra mensaje de "Perdiste"
+    const message = document.getElementById("message");
+    message.textContent = "¡Perdiste! 😢";
+    message.className = "game-over"; // 👉 Clase para poder personalizar estilo
 }
 
 async function saveScore(alias, time) {
@@ -117,12 +159,17 @@ async function saveScore(alias, time) {
         console.log("Puntaje guardado correctamente");
 
         // Mostrar el nuevo Top 10 con el puntaje resaltado
-        fetchTopTen();
+        await fetchTopTen();
+
+        // Mostrar el end-screen después de un pequeño loading
+        showLoadingThen("end-screen", 1000); // podés ajustar el tiempo si querés
+        renderTopScores(topScores);
 
     } catch (error) {
         console.error("Error al guardar:", error);
     }
 }
+
 
 async function fetchTopTen() {
     try {
@@ -182,3 +229,32 @@ function startNewGame() {
 
 // Cargar el Top 10 al iniciar
 document.addEventListener("DOMContentLoaded", fetchTopTen);
+
+
+function updateHearts() {
+    const heartImg = document.querySelector("#hearts img");
+
+    if (attemptsLeft === 2) {
+        heartImg.src = "img/Hearts2.gif";
+    } else if (attemptsLeft === 1) {
+        heartImg.src = "img/Hearts1.gif";
+    } else if (attemptsLeft <= 0) {
+        heartImg.src = "img/Hearts0.gif";
+    }
+}
+
+function showScreen(screenId) {
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("game-screen").style.display = "none";
+    document.getElementById("end-screen").style.display = "none";
+    document.getElementById("loading-screen").style.display = "none";
+    document.getElementById(screenId).style.display = "block";
+  }
+  
+function showLoadingThen(screenIdToShow, delay = 0) {
+  showScreen("loading-screen");  // Mostrar pantalla de carga
+  setTimeout(() => {
+    showScreen(screenIdToShow);  // Mostrar la pantalla final después del delay
+  }, delay);  // Reduce el tiempo de espera aquí, por ejemplo 400ms
+}
+  

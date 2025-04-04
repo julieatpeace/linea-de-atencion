@@ -13,8 +13,8 @@
     <section>
     <div class="container">
         <div id="start-screen">
-            <img src="img/placeholder.gif" alt="">
             <h1>Memoriza la<br><span class="highlight">línea de atención</span><br>de ACNUR</h1>
+            <div id="character-start"><img src="img/placeholder.gif" alt=""></div>
             <div id="alias-container">
                 <input type="text" id="alias-input" placeholder="Ingresa tu nombre" autofocus>
             </div>
@@ -22,8 +22,9 @@
             <button onclick="startGame()">Iniciar juego</button>
         </div>
         <div id="game-screen" style="display:none;">
-            <img src="img/placeholder.gif" alt="">
-            <p>Ingresa el número de la línea de atención de ACNUR</p>
+            <div id="hearts"><img class="hearts" src="img/Hearts3.gif" alt=""></div>
+            <div class="character-game"><img src="img/placeholder.gif" alt=""></div>
+            <p>Ingresa el número de la línea de atención de ACNUR sin guiones</p>
             <input type="text" id="phone-number" placeholder="0000000" oninput="checkCharacter()">
             <p id="time">Tiempo: 0s</p>
             <p id="message"></p>
@@ -32,8 +33,11 @@
                 <button onclick="startNewGame()">Intenta otra vez</button>
             </div>
         </div>
+        <div id="loading-screen" style="display: none;">
+            <p>Cargando...</p>
+        </div>
         <div id="end-screen" style="display:none;">
-            <img src="img/placeholder.gif" alt="">
+            <div class="character-end"><img src="img/placeholder.gif" alt=""></div>
             <p id="messageVictory"></p>
             <h3>Score:</h3>
             <ul id="top-ten"></ul>

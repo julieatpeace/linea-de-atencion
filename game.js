@@ -12,6 +12,16 @@ const BIN_ID = "67f002dc8a456b7966827e66";
 const API_KEY = "$2a$10$xmGRNNh1Jm3GiKe8TM/qruZdauws0JKajj/fbhm/jcEHQ8GQGau5q";
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
+function playSound(id) {
+    const sound = document.getElementById(id);
+    if (sound) {
+        sound.currentTime = 0; // rewind to start
+        sound.play().catch((e) => {
+            console.warn(`Could not play sound: ${id}`, e);
+        });
+    }
+}
+
 function startGame() {
     document.getElementById("time").style.display = "block";
     alias = document.getElementById("alias-input").value;
@@ -75,6 +85,7 @@ function checkCharacter() {
 
     // Validación completa
     if (input === correctNumber1 || input === correctNumber2) {
+        playSound("sound-win"); // 🎉 play win sound
         const endTime = Date.now();
         const timeTaken = Math.floor((endTime - startTime) / 1000);
         messageVictory.textContent = `¡Correcto! Lo lograste en ${timeTaken} segundos.`;
@@ -97,9 +108,11 @@ function checkCharacter() {
     const actualChar = input.charAt(currentLength - 1);
 
     if (actualChar === expectedChar) {
+        playSound("sound-pop"); // 👈 Play pop sound
         message.textContent = "¡Vas bien!";
         message.className = "correct";
     } else {
+        playSound("sound-error"); // 👉 play error sound
         // ❌ Quitar el carácter incorrecto y reducir intentos
         inputEl.value = input.slice(0, -1);
         attemptsLeft--;
@@ -138,6 +151,8 @@ function endGame() {
 
     // 👉 Muestra imagen de 0 corazones
     document.querySelector("#hearts img").src = "img/Hearts0.gif";
+
+    playSound("sound-gameover"); // 🎵 game over
 
     // 👉 Muestra mensaje de "Perdiste"
     const message = document.getElementById("message");
@@ -267,14 +282,7 @@ function showLoadingThen(screenIdToShow, delay = 0) {
     showScreen(screenIdToShow);  // Mostrar la pantalla final después del delay
   }, delay);  // Reduce el tiempo de espera aquí, por ejemplo 400ms
 }
-  
-document.getElementById("toggle-music").addEventListener("click", () => {
-    const music = document.getElementById("background-music");
-    if (music.paused) {
-        music.play();
-        toggleMusicBtn.textContent = "🔊";
-    } else {
-        music.pause();
-        toggleMusicBtn.textContent = "🔇";
-    }
+
+document.getElementById("alias-input").addEventListener("input", () => {
+    playSound("sound-pop");
 });

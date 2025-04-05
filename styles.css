@@ -72,7 +72,7 @@ button:hover {
 }
 
 .container {
-    padding: 60px 60px;
+    padding: 0px 60px;
     margin: 0 auto;
     max-width: 650px;
     justify-content: center;

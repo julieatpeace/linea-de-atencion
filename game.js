@@ -31,7 +31,7 @@ function startGame() {
     }
 
     const music = document.getElementById("background-music");
-    music.volume = 0.1; // Podés ajustar volumen
+    music.volume = 0.3; // Podés ajustar volumen
     music.play().catch((e) => {
         console.warn("Autoplay bloqueado hasta que haya interacción del usuario", e);
     });

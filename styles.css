@@ -174,3 +174,10 @@ input::placeholder {
     font-size: 24px;
     color: aliceblue;
   }
+
+  #toggle-music{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background:none;
+  }

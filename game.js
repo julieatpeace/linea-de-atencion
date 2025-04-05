@@ -20,6 +20,12 @@ function startGame() {
         return;
     }
 
+    const music = document.getElementById("background-music");
+    music.volume = 0.05; // Podés ajustar volumen
+    music.play().catch((e) => {
+        console.warn("Autoplay bloqueado hasta que haya interacción del usuario", e);
+    });
+
     gameStarted = true;
     gameOver = false;
     mistakes = 0; // 👉 Reinicia errores
@@ -262,3 +268,13 @@ function showLoadingThen(screenIdToShow, delay = 0) {
   }, delay);  // Reduce el tiempo de espera aquí, por ejemplo 400ms
 }
   
+document.getElementById("toggle-music").addEventListener("click", () => {
+    const music = document.getElementById("background-music");
+    if (music.paused) {
+        music.play();
+        toggleMusicBtn.textContent = "🔊";
+    } else {
+        music.pause();
+        toggleMusicBtn.textContent = "🔇";
+    }
+});

@@ -109,10 +109,12 @@ function checkCharacter() {
 
     if (actualChar === expectedChar) {
         playSound("sound-pop"); // 👈 Play pop sound
+        animateCharacter("correct");
         message.textContent = "¡Vas bien!";
         message.className = "correct";
     } else {
         playSound("sound-error"); // 👉 play error sound
+        animateCharacter("wrong");
         // ❌ Quitar el carácter incorrecto y reducir intentos
         inputEl.value = input.slice(0, -1);
         attemptsLeft--;
@@ -286,3 +288,19 @@ function showLoadingThen(screenIdToShow, delay = 0) {
 document.getElementById("alias-input").addEventListener("input", () => {
     playSound("sound-pop");
 });
+
+function animateCharacter(reaction) {
+    const character = document.getElementById("game-character");
+    const baseImage = "img/placeholder.gif";
+    
+    if (reaction === "correct") {
+        character.src = "img/right.gif";
+    } else if (reaction === "wrong") {
+        character.src = "img/wrong.gif";
+    }
+
+    // Luego de un momento, volver a imagen base
+    setTimeout(() => {
+        character.src = baseImage;
+    }, 300); // Puedes ajustar el tiempo según duración del gif
+}

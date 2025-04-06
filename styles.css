@@ -148,7 +148,7 @@ input::placeholder {
 }
 
 .hearts{
-    width: 100px;
+    width: 130px;
     height: auto;
 }
 
@@ -181,3 +181,15 @@ input::placeholder {
     top: 10px;
     background:none;
   }
+
+  .character-game {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .character-game img {
+    width: auto
+    height: 200px;
+    transition: all 0.2s ease;
+  }
+  

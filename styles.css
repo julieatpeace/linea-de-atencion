@@ -64,11 +64,11 @@ button:hover {
 }
 
 .correct {
-    color: green;
+    color: rgb(64, 235, 113);
 }
 
 .incorrect {
-    color: red;
+    color: #FAEB00;
 }
 
 .container {
@@ -148,12 +148,12 @@ input::placeholder {
 }
 
 .hearts{
-    width: 130px;
+    width: 140px;
     height: auto;
 }
 
 .game-over {
-    color: red;
+    color: #FAEB00;
     font-weight: bold;
     font-size: 1.5em;
     animation: shake 0.3s ease-in-out 2;
@@ -188,8 +188,8 @@ input::placeholder {
   }
   
   .character-game img {
-    width: auto
-    height: 200px;
+    width: auto;
+    height: 100px;
     transition: all 0.2s ease;
   }
   

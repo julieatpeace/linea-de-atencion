@@ -50,6 +50,8 @@ function startGame() {
     document.getElementById("game-screen").style.display = "block";
     document.getElementById("end-screen").style.display = "none";
 
+    document.getElementById("game-character").src = "img/placeholder.gif";
+
     setTimeout(() => {
         document.getElementById("phone-number").focus();
     }, 100);
@@ -155,6 +157,8 @@ function endGame() {
     document.querySelector("#hearts img").src = "img/Hearts0.gif";
 
     playSound("sound-gameover"); // 🎵 game over
+    const character = document.getElementById("game-character");
+    character.src = "img/lose.gif";
 
     // 👉 Muestra mensaje de "Perdiste"
     const message = document.getElementById("message");
@@ -292,15 +296,17 @@ document.getElementById("alias-input").addEventListener("input", () => {
 function animateCharacter(reaction) {
     const character = document.getElementById("game-character");
     const baseImage = "img/placeholder.gif";
-    
+
     if (reaction === "correct") {
         character.src = "img/right.gif";
     } else if (reaction === "wrong") {
         character.src = "img/wrong.gif";
     }
 
-    // Luego de un momento, volver a imagen base
+    // Luego de un momento, volver a imagen base SOLO si no se ha perdido
     setTimeout(() => {
-        character.src = baseImage;
-    }, 300); // Puedes ajustar el tiempo según duración del gif
+        if (!gameOver) {
+            character.src = baseImage;
+        }
+    }, 300);
 }

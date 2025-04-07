@@ -16,7 +16,7 @@ p{
 h3{
     color: #80B9DE;
     font-size: 24px;
-    margin: 5px 0;
+    margin: 20px 0 0 0;
 }
 
 input {
@@ -67,15 +67,6 @@ button:active{
 #message {
     font-weight: bold;
     margin-top: 20px;
-}
-
-#top-ten {
-    list-style-type: none;
-    padding: 0;
-}
-
-#top-ten li {
-    margin:0;
 }
 
 .correct {
@@ -227,7 +218,6 @@ input::placeholder {
   }
   
   #top-ten {
-    margin-top: 2rem;
     list-style: none;
     padding: 0;
     font-size: 0.9rem;
@@ -236,4 +226,8 @@ input::placeholder {
   
   #top-ten li {
     margin-bottom: 0.3rem;
+  }
+
+  .character-end{
+    margin-top: 50px;
   }

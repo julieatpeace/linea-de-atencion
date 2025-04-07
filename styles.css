@@ -131,6 +131,7 @@ input::placeholder {
 /* Asegurar que el campo de teléfono solo acepte números */
 
 #phone-number {
+    text-align: left;
     ime-mode: disabled;
     letter-spacing: 15px; /* Adjust spacing for 7 numbers */
     font-family: "Funnel Display", sans-serif;

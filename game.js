@@ -314,3 +314,9 @@ function animateCharacter(reaction) {
         }
     }, 300);
 }
+
+document.getElementById("alias-input").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        startGame();
+    }
+});

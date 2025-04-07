@@ -54,6 +54,9 @@ function startGame() {
 
     setTimeout(() => {
         document.getElementById("phone-number").focus();
+    
+        // 👉 Desplaza el contenido hacia arriba en móviles
+        window.scrollTo(0, document.getElementById("game-screen").offsetTop);
     }, 100);
 
     startTime = Date.now();

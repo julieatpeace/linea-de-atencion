@@ -8,7 +8,7 @@ let lastTimeTaken = null;
 
 const correctNumber1 = "8007096";
 const correctNumber2 = "+50321130281";
-const BIN_ID = "67f002dc8a456b7966827e66";
+const BIN_ID = "67f343158561e97a50fa0a04";
 const API_KEY = "$2a$10$xmGRNNh1Jm3GiKe8TM/qruZdauws0JKajj/fbhm/jcEHQ8GQGau5q";
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 

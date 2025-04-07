@@ -90,7 +90,8 @@ function checkCharacter() {
         playSound("sound-win"); // 🎉 play win sound
         const endTime = Date.now();
         const timeTaken = Math.floor((endTime - startTime) / 1000);
-        messageVictory.textContent = `¡Correcto! Lo lograste en ${timeTaken} segundos.`;
+        messageVictory.textContent = "¡Correcto!";
+        messageVictory.setAttribute("data-time", `Lo lograste en ${timeTaken} segundos.`);
     
         gameStarted = false;
         clearInterval(interval);

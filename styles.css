@@ -8,6 +8,17 @@ body {
     background-color: #0072BC;
 }
 
+p{
+    color: #80B9DE;
+    font-size: 24px;
+}
+
+h3{
+    color: #80B9DE;
+    font-size: 24px;
+    margin: 5px 0;
+}
+
 input {
     padding: 10px;
     font-size: 18px;
@@ -26,10 +37,10 @@ button {
 }
 
 h1{
-    font-size: 50px;
+    font-size: 40px;
     color: aliceblue;
-    line-height: 50px;
-    margin-top: 0;
+    line-height: 40px;
+    margin: 20px;
 }
 
 img{
@@ -38,14 +49,18 @@ img{
 
 h1 .highlight {
     background: #575ec4;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(30deg, #92c5ff , #7bc7e7);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(30deg, #92c5ff , #7bc7e7);
+    background: -webkit-linear-gradient(45deg, #92adff , #6df5ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(45deg, #92adff , #6df5ff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 } 
 
 button:hover {
+    background-color: #f7ce00;
+}
+
+button:active{
     background-color: #0056b3;
 }
 
@@ -60,11 +75,11 @@ button:hover {
 }
 
 #top-ten li {
-    margin: 5px 0;
+    margin:0;
 }
 
 .correct {
-    color: rgb(64, 235, 113);
+    color: rgb(99, 221, 78);
 }
 
 .incorrect {
@@ -93,7 +108,7 @@ section {
     cursor: text;
 }
 
-#alias-input {
+input {
     font-family: "Funnel Display", sans-serif;
     background: transparent;
     border: none;
@@ -142,6 +157,7 @@ input::placeholder {
 
 .highlight-score {
     background-color: #FAEB00;
+    color: black;
     font-weight: bold;
     padding: 5px;
     border-radius: 20px;
@@ -150,6 +166,7 @@ input::placeholder {
 .hearts{
     width: 140px;
     height: auto;
+    margin: 20px;
 }
 
 .game-over {
@@ -193,3 +210,30 @@ input::placeholder {
     transition: all 0.2s ease;
   }
   
+  #messageVictory {
+    font-size: 2.5rem;
+    color: yellow;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  #messageVictory::after {
+    content: attr(data-time);
+    display: block;
+    font-size: 1rem;
+    color: white;
+    margin-top: 0.25rem;
+    font-weight: normal;
+  }
+  
+  #top-ten {
+    margin-top: 2rem;
+    list-style: none;
+    padding: 0;
+    font-size: 0.9rem;
+    color: #80B9DE;
+  }
+  
+  #top-ten li {
+    margin-bottom: 0.3rem;
+  }
